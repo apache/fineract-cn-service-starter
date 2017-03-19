@@ -88,9 +88,7 @@ public class Microservice<T> extends ExternalResource {
   public void start() throws ArtifactResolutionException, IOException, InterruptedException {
 
     final ArtifactResolver artifactResolver = new ArtifactResolver(
-            IntegrationTestEnvironment.getArtifactoryDirectory(),
-            IntegrationTestEnvironment.getBintrayUser(),
-            IntegrationTestEnvironment.getBintrayPassword());
+            IntegrationTestEnvironment.getArtifactoryDirectory());
 
     final File jarFile = artifactResolver.getJarFile(artifactName, "io.mifos." + artifactName, "service-boot", artifactVersion);
 

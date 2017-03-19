@@ -50,16 +50,6 @@ public class IntegrationTestEnvironment extends ExternalResource {
     return homeDirectory + File.separator + ".m2" + File.separator + "repository";
   }
 
-  static String getBintrayUser()
-  {
-    return System.getenv().get("BINTRAY_USER");
-  }
-
-  static String getBintrayPassword()
-  {
-    return System.getenv().get("BINTRAY_PASSWORD");
-  }
-
   private int nextPort;
   private final Set<Integer> ports;
   private final RsaKeyPairFactory.KeyPairHolder keyPairHolder;

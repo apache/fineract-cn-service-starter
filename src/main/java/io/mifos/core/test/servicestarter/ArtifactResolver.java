@@ -33,22 +33,10 @@ import java.util.Collections;
  */
 class ArtifactResolver {
   private final String artifactoryDirectory;
-  private final String username;
-  private final String password;
 
-  private RemoteRepository repositoryForProject(final String project)
-  {
-    return new RemoteRepository.Builder(project, "default", "https://mifosio-radar.bintray.com/io.mifos." + project)
-            .setAuthentication(new AuthenticationBuilder().addUsername(username).addPassword(password).build())
-            .build();
-  }
-
-
-  ArtifactResolver(final String artifactoryDirectory, final String username, final String password)
+  ArtifactResolver(final String artifactoryDirectory)
   {
     this.artifactoryDirectory = artifactoryDirectory;
-    this.username = username;
-    this.password = password;
   }
 
   File getJarFile(final String project, final String group, final String name, final String version)
@@ -59,7 +47,6 @@ class ArtifactResolver {
 
     final ArtifactRequest artifactRequest = new ArtifactRequest();
     artifactRequest.setArtifact(new DefaultArtifact(group, name, "jar", version));
-    artifactRequest.setRepositories(Collections.singletonList(repositoryForProject(project)));
 
     final ArtifactResult artifactResult = system.resolveArtifact(session, artifactRequest);
 
