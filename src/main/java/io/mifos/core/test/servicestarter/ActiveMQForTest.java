@@ -41,7 +41,7 @@ public class ActiveMQForTest extends ExternalResource {
 
   @Configuration
   @EnableAutoConfiguration(exclude= {HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class})
-  @EnableEventRecording
+  @EnableEventRecording(maxWait = 45000L)
   public static class ActiveMQListenConfiguration {
     @Bean
     public PooledConnectionFactory jmsFactory() {
