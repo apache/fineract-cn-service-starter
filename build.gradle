@@ -21,6 +21,7 @@ ext.versions = [
         frameworkanubis : '0.1.0-BUILD-SNAPSHOT',
         validator       : '5.3.0.Final',
         springcontext   : '4.3.3.RELEASE',
+        activeMQ        : '5.13.2',
 ]
 
 apply plugin: 'java'
@@ -61,8 +62,8 @@ dependencies {
             [group: 'org.apache.maven', name: 'maven-aether-provider', version: '3.1.0'],
             [group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka-server'],
             [group: 'org.springframework', name: 'spring-jms', version: versions.springcontext],
-            [group: 'org.apache.activemq', name: 'activemq-broker', version: '5.13.2'],
-            [group: 'org.apache.activemq', name: 'activemq-spring', version: '5.13.2'],
+            [group: 'org.apache.activemq', name: 'activemq-broker', version: versions.activeMQ],
+            [group: 'org.apache.activemq', name: 'activemq-spring', version: versions.activeMQ],
     )
 }
 
