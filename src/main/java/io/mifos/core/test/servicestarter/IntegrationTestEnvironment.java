@@ -83,9 +83,11 @@ public class IntegrationTestEnvironment extends ExternalResource {
 
     nextPort = 2020;
     this.ports = new HashSet<>();
+    //Prevent the following ports from being allocated to Microservices.
     this.ports.add(0);
     this.ports.add(3306); //MySQL
     this.ports.add(9142); //Cassandra
+    this.ports.add(ActiveMQForTest.PORT);
     this.ports.add(EurekaForTest.PORT);
 
     this.applicationNames = new ArrayList<>();

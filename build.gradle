@@ -19,7 +19,8 @@ ext.versions = [
         frameworkapi    : '0.1.0-BUILD-SNAPSHOT',
         frameworktest   : '0.1.0-BUILD-SNAPSHOT',
         frameworkanubis : '0.1.0-BUILD-SNAPSHOT',
-        validator   : '5.3.0.Final'
+        validator       : '5.3.0.Final',
+        springcontext   : '4.3.3.RELEASE',
 ]
 
 apply plugin: 'java'
@@ -59,6 +60,9 @@ dependencies {
             [group: 'org.eclipse.aether', name: 'aether-transport-http', version: '1.1.0'],
             [group: 'org.apache.maven', name: 'maven-aether-provider', version: '3.1.0'],
             [group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka-server'],
+            [group: 'org.springframework', name: 'spring-jms', version: versions.springcontext],
+            [group: 'org.apache.activemq', name: 'activemq-broker', version: '5.13.2'],
+            [group: 'org.apache.activemq', name: 'activemq-spring', version: '5.13.2'],
     )
 }
 

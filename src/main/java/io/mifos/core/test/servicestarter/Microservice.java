@@ -67,6 +67,7 @@ public class Microservice<T> extends ExternalResource {
     processEnvironment.setProperty("eureka.instance.leaseRenewalIntervalInSeconds", "1"); //Speed up registration for test purposes.
     processEnvironment.setProperty("eureka.client.initialInstanceInfoReplicationIntervalSeconds", "0");  //Speed up initial registration for test purposes.
     processEnvironment.setProperty("eureka.client.instanceInfoReplicationIntervalSeconds", "1");
+    processEnvironment.setProperty("activemq.brokerUrl", ActiveMQForTest.BIND_ADDRESS);
 
     this.integrationTestEnvironment = integrationTestEnvironment;
   }
