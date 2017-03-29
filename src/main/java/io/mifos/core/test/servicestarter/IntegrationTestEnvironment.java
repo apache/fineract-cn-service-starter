@@ -38,6 +38,7 @@ import static io.mifos.core.test.env.TestEnvironment.*;
 public class IntegrationTestEnvironment extends ExternalResource {
 
 
+
   static String getJava()
   {
     final String javaHome = System.getProperty("java.home");
@@ -50,6 +51,7 @@ public class IntegrationTestEnvironment extends ExternalResource {
     return homeDirectory + File.separator + ".m2" + File.separator + "repository";
   }
 
+  private final String tenantName;
   private int nextPort;
   private final Set<Integer> ports;
   private final RsaKeyPairFactory.KeyPairHolder keyPairHolder;
@@ -58,7 +60,13 @@ public class IntegrationTestEnvironment extends ExternalResource {
   private final List<String> applicationNames;
   private TenantDataStoreTestContext tenantDataStoreTestContext;
 
+  @SuppressWarnings("unused")
   public IntegrationTestEnvironment(final DataStoreTenantInitializer... dataStoreTenantInitializers) {
+    this(null, dataStoreTenantInitializers);
+  }
+
+  public IntegrationTestEnvironment(final String tenantName, final DataStoreTenantInitializer... dataStoreTenantInitializers) {
+    this.tenantName = tenantName;
     final Properties properties = System.getProperties();
     properties.setProperty(CASSANDRA_CLUSTER_NAME_PROPERTY, CASSANDRA_CLUSTER_NAME_DEFAULT);
     properties.setProperty(CASSANDRA_CONTACT_POINTS_PROPERTY, CASSANDRA_CONTACT_POINTS_DEFAULT);
@@ -95,7 +103,10 @@ public class IntegrationTestEnvironment extends ExternalResource {
 
   @Override
   protected void before() {
-    tenantDataStoreTestContext = TenantDataStoreTestContext.forRandomTenantName(dataStoreTenantInitializers);
+    if (tenantName == null)
+      tenantDataStoreTestContext = TenantDataStoreTestContext.forRandomTenantName(dataStoreTenantInitializers);
+    else
+      tenantDataStoreTestContext = TenantDataStoreTestContext.forDefinedTenantName(tenantName, dataStoreTenantInitializers);
   }
 
   @Override
