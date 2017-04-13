@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class EurekaForTest extends ExternalResource {
   static final int PORT = 8761;
-  static final String DEFAULT_ZONE = "http://localhost:" + PORT + "/eureka/";
+  static final String DEFAULT_ZONE = "http://localhost:" + PORT + "/eureka";
   private ConfigurableApplicationContext eurekaServer;
 
   @SuppressWarnings("WeakerAccess")
