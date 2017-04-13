@@ -55,7 +55,7 @@ public class Microservice<T> extends ExternalResource {
     applicationName = AnnotatedElementUtils.getMergedAnnotationAttributes(clazz, FeignClient.class).getString("value");
     this.processEnvironment = new TestEnvironment(applicationName);
     processEnvironment.setProperty(TestEnvironment.SERVER_PORT_PROPERTY, integrationTestEnvironment.getFreshPort().toString());
-    processEnvironment.setKeyPair(integrationTestEnvironment.getSeshatPublicKey(), integrationTestEnvironment.getSeshatPrivateKey());
+    processEnvironment.setKeyPair(integrationTestEnvironment.getSeshatKeyTimestamp(), integrationTestEnvironment.getSeshatPublicKey(), integrationTestEnvironment.getSeshatPrivateKey());
 
     //https://github.com/spring-cloud/spring-cloud-netflix/issues/373
     //http://blog.abhijitsarkar.org/technical/netflix-eureka/

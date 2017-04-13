@@ -83,10 +83,11 @@ public class IntegrationTestEnvironment extends ExternalResource {
     properties.setProperty(HYSTRIX_ENABLED_PROPERTY, HYSTRIX_ENABLED_DEFAULT);
     properties.setProperty(RIBBON_USES_EUREKA_PROPERTY, RIBBON_USES_EUREKA_DEFAULT);
     this.keyPairHolder = RsaKeyPairFactory.createKeyPair();
+    properties.setProperty(SYSTEM_PUBLIC_KEY_TIMESTAMP_PROPERTY, this.keyPairHolder.getTimestamp());
     properties.setProperty(SYSTEM_PUBLIC_KEY_MODULUS_PROPERTY, this.keyPairHolder.publicKey().getModulus().toString());
     properties.setProperty(SYSTEM_PUBLIC_KEY_EXPONENT_PROPERTY, this.keyPairHolder.publicKey().getPublicExponent().toString());
 
-    this.systemSecurityEnvironment = new SystemSecurityEnvironment(keyPairHolder.publicKey(), keyPairHolder.privateKey());
+    this.systemSecurityEnvironment = new SystemSecurityEnvironment(keyPairHolder.getTimestamp(), keyPairHolder.publicKey(), keyPairHolder.privateKey());
     this.dataStoreTenantInitializers = dataStoreTenantInitializers;
 
     nextPort = 2020;
@@ -130,6 +131,10 @@ public class IntegrationTestEnvironment extends ExternalResource {
     } catch (final IOException ignored) {
       return true;
     }
+  }
+
+  public String getSeshatKeyTimestamp() {
+    return this.keyPairHolder.getTimestamp();
   }
 
   public RSAPublicKey getSeshatPublicKey() {
