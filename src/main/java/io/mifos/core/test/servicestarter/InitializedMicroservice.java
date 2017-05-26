@@ -16,6 +16,7 @@
 package io.mifos.core.test.servicestarter;
 
 import io.mifos.anubis.test.v1.TenantApplicationSecurityEnvironmentTestRule;
+import io.mifos.core.test.env.ExtraProperties;
 import org.eclipse.aether.resolution.ArtifactResolutionException;
 
 import java.io.IOException;

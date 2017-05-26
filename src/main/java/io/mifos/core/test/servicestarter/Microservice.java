@@ -16,15 +16,20 @@
 package io.mifos.core.test.servicestarter;
 
 import io.mifos.core.api.util.ApiFactory;
+import io.mifos.core.test.env.ExtraProperties;
 import io.mifos.core.test.env.TestEnvironment;
 import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.junit.rules.ExternalResource;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import static io.mifos.core.test.env.TestEnvironment.SPRING_CLOUD_DISCOVERY_ENABLED_PROPERTY;
 
@@ -76,6 +81,19 @@ public class Microservice<T> extends ExternalResource {
     properties.entrySet().forEach(x -> this.processEnvironment.setProperty(x.getKey(), x.getValue()));
 
     return this;
+  }
+
+  public void waitTillRegistered(final DiscoveryClient discoveryClient, final Microservice... dependentOnServices) {
+    if (discoveryClient != null) {
+      Stream.concat(Stream.of(applicationName), Stream.of(dependentOnServices).map(Microservice::name))
+              .forEach(x -> {
+                boolean found = false;
+                while (!found) {
+                  final List<ServiceInstance> thisApp = discoveryClient.getInstances(x);
+                  found = !thisApp.isEmpty();
+                }
+              });
+    }
   }
 
   @Override
