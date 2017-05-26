@@ -72,6 +72,12 @@ public class Microservice<T> extends ExternalResource {
     this.integrationTestEnvironment = integrationTestEnvironment;
   }
 
+  public Microservice<T> addProperties(final ExtraProperties properties) {
+    properties.entrySet().forEach(x -> this.processEnvironment.setProperty(x.getKey(), x.getValue()));
+
+    return this;
+  }
+
   @Override
   protected void before() throws InterruptedException, IOException, ArtifactResolutionException {
     start();
