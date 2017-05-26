@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * @author Myrle Krantz
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class InitializedMicroservice<T> extends Microservice<T> {
   public InitializedMicroservice(
           final Class<T> clazz,
@@ -32,6 +32,12 @@ public class InitializedMicroservice<T> extends Microservice<T> {
           final IntegrationTestEnvironment integrationTestEnvironment) {
     super(clazz, artifactName, artifactVersion, integrationTestEnvironment);
     this.integrationTestEnvironment.addApplication(applicationName);
+  }
+
+  @Override
+  public InitializedMicroservice<T> addProperties(final ExtraProperties properties) {
+    super.addProperties(properties);
+    return this;
   }
 
   public void start() throws InterruptedException, IOException, ArtifactResolutionException {
