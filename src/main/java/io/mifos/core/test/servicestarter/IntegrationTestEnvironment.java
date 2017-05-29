@@ -81,7 +81,7 @@ public class IntegrationTestEnvironment extends ExternalResource {
     properties.setProperty(MARIADB_USER_PROPERTY, MARIADB_USER_DEFAULT);
     properties.setProperty(MARIADB_PASSWORD_PROPERTY, MARIADB_PASSWORD_DEFAULT);
     properties.setProperty(HYSTRIX_ENABLED_PROPERTY, HYSTRIX_ENABLED_DEFAULT);
-    properties.setProperty(RIBBON_USES_EUREKA_PROPERTY, RIBBON_USES_EUREKA_DEFAULT);
+    properties.setProperty(RIBBON_USES_EUREKA_PROPERTY, "true");
     this.keyPairHolder = RsaKeyPairFactory.createKeyPair();
     properties.setProperty(SYSTEM_PUBLIC_KEY_TIMESTAMP_PROPERTY, this.keyPairHolder.getTimestamp());
     properties.setProperty(SYSTEM_PUBLIC_KEY_MODULUS_PROPERTY, this.keyPairHolder.publicKey().getModulus().toString());

@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import static io.mifos.core.test.env.TestEnvironment.SPRING_CLOUD_DISCOVERY_ENABLED_PROPERTY;
-
 /**
  * @author Myrle Krantz
  */
@@ -65,7 +63,7 @@ public class Microservice<T> extends ExternalResource {
     //https://github.com/spring-cloud/spring-cloud-netflix/issues/373
     //http://blog.abhijitsarkar.org/technical/netflix-eureka/
     processEnvironment.setProperty("eureka.client.serviceUrl.defaultZone", EurekaForTest.DEFAULT_ZONE);
-    processEnvironment.setProperty(SPRING_CLOUD_DISCOVERY_ENABLED_PROPERTY, "true");
+    processEnvironment.setProperty(TestEnvironment.SPRING_CLOUD_DISCOVERY_ENABLED_PROPERTY, "true");
     processEnvironment.setProperty("eureka.instance.hostname", "localhost");
     processEnvironment.setProperty("eureka.client.fetchRegistry", "true");
     processEnvironment.setProperty("eureka.registration.enabled", "true");
@@ -73,6 +71,8 @@ public class Microservice<T> extends ExternalResource {
     processEnvironment.setProperty("eureka.client.initialInstanceInfoReplicationIntervalSeconds", "0");  //Speed up initial registration for test purposes.
     processEnvironment.setProperty("eureka.client.instanceInfoReplicationIntervalSeconds", "1");
     processEnvironment.setProperty("activemq.brokerUrl", ActiveMQForTest.BIND_ADDRESS);
+
+    processEnvironment.setProperty(TestEnvironment.RIBBON_USES_EUREKA_PROPERTY, "true");
 
     this.integrationTestEnvironment = integrationTestEnvironment;
   }
