@@ -41,6 +41,12 @@ public class InitializedMicroservice<T> extends Microservice<T> {
     return this;
   }
 
+  @Override
+  public InitializedMicroservice<T> debug(boolean suspend, int port) {
+    super.debug(suspend, port);
+    return this;
+  }
+
   public void start() throws InterruptedException, IOException, ArtifactResolutionException {
     super.start();
     final TenantApplicationSecurityEnvironmentTestRule tenantApplicationSecurityEnvironment
