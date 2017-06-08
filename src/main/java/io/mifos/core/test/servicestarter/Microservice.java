@@ -46,6 +46,7 @@ public class Microservice<T> extends ExternalResource {
   private ApiFactory apiFactory;
   private Process process;
   private T api;
+  private String debuggingParams = null;
 
   public Microservice(
           final Class<T> clazz,
@@ -79,6 +80,12 @@ public class Microservice<T> extends ExternalResource {
 
   public Microservice<T> addProperties(final ExtraProperties properties) {
     properties.entrySet().forEach(x -> this.processEnvironment.setProperty(x.getKey(), x.getValue()));
+
+    return this;
+  }
+
+  public Microservice<T> debug(boolean suspend, int port) {
+    this.debuggingParams = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (suspend ? "y" : "n") + ",address=" + port;
 
     return this;
   }
@@ -117,8 +124,14 @@ public class Microservice<T> extends ExternalResource {
 
     final File jarFile = artifactResolver.getJarFile(artifactName, "io.mifos." + artifactName, "service-boot", artifactVersion);
 
-    final ProcessBuilder processBuilder
-            = new ProcessBuilder(IntegrationTestEnvironment.getJava(), "-jar", jarFile.getAbsolutePath());
+    final ProcessBuilder processBuilder;
+    if (debuggingParams == null) {
+      processBuilder = new ProcessBuilder(IntegrationTestEnvironment.getJava(), "-jar", jarFile.getAbsolutePath());
+    }
+    else {
+      processBuilder = new ProcessBuilder(IntegrationTestEnvironment.getJava(), debuggingParams,
+              "-jar", jarFile.getAbsolutePath());
+    }
     processEnvironment.populateProcessEnvironment(processBuilder);
     processBuilder.inheritIO();
 
