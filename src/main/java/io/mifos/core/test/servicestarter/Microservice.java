@@ -29,13 +29,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 /**
  * @author Myrle Krantz
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Microservice<T> extends ExternalResource {
+
+  private static final long MAX_WAIT_DEFAULT = 150;
 
   private final Class<T> clazz;
   private final String artifactName;
@@ -47,6 +48,7 @@ public class Microservice<T> extends ExternalResource {
   private Process process;
   private T api;
   private String debuggingParams = null;
+  private long maxWait = MAX_WAIT_DEFAULT;
 
   public Microservice(
           final Class<T> clazz,
@@ -90,17 +92,42 @@ public class Microservice<T> extends ExternalResource {
     return this;
   }
 
-  public void waitTillRegistered(final DiscoveryClient discoveryClient, final Microservice... dependentOnServices) {
-    if (discoveryClient != null) {
-      Stream.concat(Stream.of(applicationName), Stream.of(dependentOnServices).map(Microservice::name))
-              .forEach(x -> {
-                boolean found = false;
-                while (!found) {
-                  final List<ServiceInstance> thisApp = discoveryClient.getInstances(x);
-                  found = !thisApp.isEmpty();
-                }
-              });
+  public Microservice<T> maxWait(final long maxWait) {
+    this.maxWait = maxWait;
+    return this;
+  }
+
+  public Microservice<T> setApiFactory(final ApiFactory newValue)
+  {
+    this.apiFactory = newValue;
+    return this;
+  }
+
+  public boolean waitTillRegistered(final DiscoveryClient discoveryClient) throws InterruptedException {
+    if (discoveryClient == null) {
+      return false;
     }
+
+    long nextWait = 1;
+    long sumWait = 0;
+
+    boolean found = false;
+
+    while (!found) {
+      final List<ServiceInstance> thisApp = discoveryClient.getInstances(applicationName);
+      found = !thisApp.isEmpty();
+      if (!found) {
+        TimeUnit.SECONDS.sleep(nextWait);
+        sumWait += nextWait;
+        nextWait = nextWait * 2;
+
+        if (sumWait > maxWait) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 
   @Override
@@ -143,11 +170,6 @@ public class Microservice<T> extends ExternalResource {
     process.destroy();
     process.waitFor();
     return process.exitValue();
-  }
-
-  public void setApiFactory(final ApiFactory newValue)
-  {
-    this.apiFactory = newValue;
   }
 
   public T api() {
