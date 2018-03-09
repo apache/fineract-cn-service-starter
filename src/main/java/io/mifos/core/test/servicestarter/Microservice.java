@@ -152,7 +152,7 @@ public class Microservice<T> extends ExternalResource {
     final ArtifactResolver artifactResolver = new ArtifactResolver(
             IntegrationTestEnvironment.getArtifactoryDirectory());
 
-    final File jarFile = artifactResolver.getJarFile(artifactName, "io.mifos." + artifactName, "service-boot", artifactVersion);
+    final File jarFile = artifactResolver.getJarFile(artifactName, "org.apache.fineract.cn." + artifactName, "service-boot", artifactVersion);
 
     final ProcessBuilder processBuilder;
     if (debuggingParams == null) {
