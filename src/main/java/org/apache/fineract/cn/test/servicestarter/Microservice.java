@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
+package org.apache.fineract.cn.test.servicestarter;
 
 import org.apache.fineract.cn.api.util.ApiFactory;
 import org.apache.fineract.cn.test.env.ExtraProperties;

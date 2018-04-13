@@ -8,7 +8,7 @@
  * Contributors:
  *    Sonatype, Inc. - initial API and implementation
  *******************************************************************************/
-package io.mifos.core.test.servicestarter.aether;
+package org.apache.fineract.cn.test.servicestarter.aether;
 
 
 import org.eclipse.aether.AbstractRepositoryListener;

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
+package org.apache.fineract.cn.test.servicestarter;
 
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.jms.pool.PooledConnectionFactory;

@@ -16,20 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
+package org.apache.fineract.cn.test.servicestarter;
 
-import io.mifos.core.test.servicestarter.aether.Booter;
+import org.apache.fineract.cn.test.servicestarter.aether.Booter;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.DefaultArtifact;
-import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.resolution.ArtifactRequest;
 import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.eclipse.aether.resolution.ArtifactResult;
-import org.eclipse.aether.util.repository.AuthenticationBuilder;
 
 import java.io.File;
-import java.util.Collections;
 
 /**
  * @author Myrle Krantz
