@@ -16,13 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
-
-import io.mifos.anubis.test.v1.TenantApplicationSecurityEnvironmentTestRule;
-import io.mifos.core.test.env.ExtraProperties;
-import org.eclipse.aether.resolution.ArtifactResolutionException;
+package org.apache.fineract.cn.test.servicestarter;
 
 import java.io.IOException;
+import org.apache.fineract.cn.anubis.test.v1.TenantApplicationSecurityEnvironmentTestRule;
+import org.apache.fineract.cn.test.env.ExtraProperties;
+import org.eclipse.aether.resolution.ArtifactResolutionException;
 
 /**
  * @author Myrle Krantz

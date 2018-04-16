@@ -16,12 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
+package org.apache.fineract.cn.test.servicestarter;
 
-import io.mifos.core.test.listener.EnableEventRecording;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.jms.pool.PooledConnectionFactory;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
+import org.apache.fineract.cn.test.listener.EnableEventRecording;
 import org.junit.rules.ExternalResource;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

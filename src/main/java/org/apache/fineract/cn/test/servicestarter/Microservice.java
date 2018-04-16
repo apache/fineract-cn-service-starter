@@ -16,11 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
+package org.apache.fineract.cn.test.servicestarter;
 
-import io.mifos.core.api.util.ApiFactory;
-import io.mifos.core.test.env.ExtraProperties;
-import io.mifos.core.test.env.TestEnvironment;
+import org.apache.fineract.cn.api.util.ApiFactory;
+import org.apache.fineract.cn.test.env.ExtraProperties;
+import org.apache.fineract.cn.test.env.TestEnvironment;
 import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.junit.rules.ExternalResource;
 import org.springframework.cloud.client.ServiceInstance;

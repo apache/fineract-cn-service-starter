@@ -16,13 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package io.mifos.core.test.servicestarter;
+package org.apache.fineract.cn.test.servicestarter;
 
-import io.mifos.anubis.test.v1.SystemSecurityEnvironment;
-import io.mifos.core.api.context.AutoUserContext;
-import io.mifos.core.lang.security.RsaKeyPairFactory;
-import io.mifos.core.test.fixture.DataStoreTenantInitializer;
-import io.mifos.core.test.fixture.TenantDataStoreTestContext;
+import org.apache.fineract.cn.anubis.test.v1.SystemSecurityEnvironment;
+import org.apache.fineract.cn.api.context.AutoUserContext;
+import org.apache.fineract.cn.lang.security.RsaKeyPairFactory;
+import org.apache.fineract.cn.test.fixture.DataStoreTenantInitializer;
+import org.apache.fineract.cn.test.fixture.TenantDataStoreTestContext;
 import org.junit.rules.ExternalResource;
 
 import java.io.File;
@@ -32,7 +32,7 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.*;
 
-import static io.mifos.core.test.env.TestEnvironment.*;
+import static org.apache.fineract.cn.test.env.TestEnvironment.*;
 
 /**
  * @author Myrle Krantz
