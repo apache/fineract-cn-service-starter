@@ -41,7 +41,6 @@ import static org.apache.fineract.cn.test.env.TestEnvironment.*;
 public class IntegrationTestEnvironment extends ExternalResource {
 
 
-
   static String getJava()
   {
     final String javaHome = System.getProperty("java.home");
@@ -56,6 +55,7 @@ public class IntegrationTestEnvironment extends ExternalResource {
 
   private final String tenantName;
   private int nextPort;
+  private int nextDebugPort;
   private final Set<Integer> ports;
   private final RsaKeyPairFactory.KeyPairHolder keyPairHolder;
   private final SystemSecurityEnvironment systemSecurityEnvironment;
@@ -94,6 +94,7 @@ public class IntegrationTestEnvironment extends ExternalResource {
     this.dataStoreTenantInitializers = dataStoreTenantInitializers;
 
     nextPort = 2020;
+    nextDebugPort = 3020;
     this.ports = new HashSet<>();
     //Prevent the following ports from being allocated to Microservices.
     this.ports.add(0);
@@ -126,6 +127,16 @@ public class IntegrationTestEnvironment extends ExternalResource {
 
     ports.add(nextPort);
     return nextPort;
+  }
+
+  Integer getFreshDebugPort() {
+    while (ports.contains(nextDebugPort) || !available(nextDebugPort))
+    {
+      nextDebugPort += 1;
+    }
+
+    ports.add(nextDebugPort);
+    return nextDebugPort;
   }
 
   private static boolean available(int port) {

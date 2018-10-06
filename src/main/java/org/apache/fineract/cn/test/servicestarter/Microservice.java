@@ -50,7 +50,8 @@ public class Microservice<T> extends ExternalResource {
   private ApiFactory apiFactory;
   private Process process;
   private T api;
-  private String debuggingParams = null;
+  private Integer debuggingPort = null;
+  private boolean debugSuspend = false;
   private long maxWait = MAX_WAIT_DEFAULT;
 
   public Microservice(
@@ -90,7 +91,15 @@ public class Microservice<T> extends ExternalResource {
   }
 
   public Microservice<T> debug(boolean suspend, int port) {
-    this.debuggingParams = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (suspend ? "y" : "n") + ",address=" + port;
+    this.debuggingPort = port;
+    this.debugSuspend = suspend;
+
+    return this;
+  }
+
+  public Microservice<T> runInDebug() {
+    this.debuggingPort = integrationTestEnvironment.getFreshDebugPort();
+    this.debugSuspend = false;
 
     return this;
   }
@@ -155,11 +164,11 @@ public class Microservice<T> extends ExternalResource {
     final File jarFile = artifactResolver.getJarFile(artifactName, "org.apache.fineract.cn." + artifactName, "service-boot", artifactVersion);
 
     final ProcessBuilder processBuilder;
-    if (debuggingParams == null) {
+    if (debuggingPort == null) {
       processBuilder = new ProcessBuilder(IntegrationTestEnvironment.getJava(), "-jar", jarFile.getAbsolutePath());
     }
     else {
-      processBuilder = new ProcessBuilder(IntegrationTestEnvironment.getJava(), debuggingParams,
+      processBuilder = new ProcessBuilder(IntegrationTestEnvironment.getJava(), "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (debugSuspend ? "y" : "n") + ",address=" + debuggingPort,
               "-jar", jarFile.getAbsolutePath());
     }
     processEnvironment.populateProcessEnvironment(processBuilder);
@@ -193,5 +202,22 @@ public class Microservice<T> extends ExternalResource {
 
   public String name() {
     return applicationName;
+  }
+
+  public Integer debuggingPort() {
+    return debuggingPort;
+  }
+
+  public String toString() {
+    final StringBuilder ret = new StringBuilder(applicationName);
+    ret.append(" address:");
+    ret.append(this.getProcessEnvironment().serverURI());
+
+    if (debuggingPort != null) {
+      ret.append(", debuggingPort: ");
+      ret.append(debuggingPort);
+    }
+
+    return ret.toString();
   }
 }
