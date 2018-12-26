@@ -175,7 +175,6 @@ public class Microservice<T> extends ExternalResource {
     processBuilder.inheritIO();
 
     process = processBuilder.start();
-    TimeUnit.SECONDS.sleep(40); //TODO: Replace this with event listening.
   }
 
   public int kill() throws InterruptedException {
