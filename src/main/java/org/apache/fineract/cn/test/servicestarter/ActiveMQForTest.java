@@ -78,7 +78,7 @@ public class ActiveMQForTest extends ExternalResource {
 
   }
 
-  private static final String CONCURRENCY = "3-10";
+  private static final String CONCURRENCY = "1-1";
 
   private BrokerService broker;
 
