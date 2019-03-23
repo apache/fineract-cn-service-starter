@@ -77,12 +77,12 @@ public class IntegrationTestEnvironment extends ExternalResource {
     properties.setProperty(CASSANDRA_CONSISTENCY_LEVEL_READ_PROPERTY, CASSANDRA_CONSISTENCY_LEVEL_DEFAULT);
     properties.setProperty(CASSANDRA_CONSISTENCY_LEVEL_WRITE_PROPERTY, CASSANDRA_CONSISTENCY_LEVEL_DEFAULT);
     properties.setProperty(CASSANDRA_CONSISTENCY_LEVEL_DELETE_PROPERTY, CASSANDRA_CONSISTENCY_LEVEL_DEFAULT);
-    properties.setProperty(MARIADB_DRIVER_CLASS_PROPERTY, MARIADB_DRIVER_CLASS_DEFAULT);
-    properties.setProperty(MARIADB_DATABASE_NAME_PROPERTY, MARIADB_DATABASE_NAME_DEFAULT);
-    properties.setProperty(MARIADB_HOST_PROPERTY, MARIADB_HOST_DEFAULT);
-    properties.setProperty(MARIADB_PORT_PROPERTY, MARIADB_PORT_DEFAULT);
-    properties.setProperty(MARIADB_USER_PROPERTY, MARIADB_USER_DEFAULT);
-    properties.setProperty(MARIADB_PASSWORD_PROPERTY, MARIADB_PASSWORD_DEFAULT);
+    properties.setProperty(POSTGRESQL_DRIVER_CLASS_PROPERTY, POSTGRESQL_DRIVER_CLASS_DEFAULT);
+    properties.setProperty(POSTGRESQL_DATABASE_NAME_PROPERTY, POSTGRESQL_DATABASE_NAME_DEFAULT);
+    properties.setProperty(POSTGRESQL_HOST_PROPERTY, POSTGRESQL_HOST_DEFAULT);
+    properties.setProperty(POSTGRESQL_PORT_PROPERTY, POSTGRESQL_PORT_DEFAULT);
+    properties.setProperty(POSTGRESQL_USER_PROPERTY, POSTGRESQL_USER_DEFAULT);
+    properties.setProperty(POSTGRESQL_PASSWORD_PROPERTY, POSTGRESQL_PASSWORD_DEFAULT);
     properties.setProperty(HYSTRIX_ENABLED_PROPERTY, HYSTRIX_ENABLED_DEFAULT);
     properties.setProperty(RIBBON_USES_EUREKA_PROPERTY, "true");
     this.keyPairHolder = RsaKeyPairFactory.createKeyPair();
@@ -98,7 +98,7 @@ public class IntegrationTestEnvironment extends ExternalResource {
     this.ports = new HashSet<>();
     //Prevent the following ports from being allocated to Microservices.
     this.ports.add(0);
-    this.ports.add(3306); //MySQL
+    this.ports.add(5432); //PostgreSQL
     this.ports.add(9142); //Cassandra
     this.ports.add(ActiveMQForTest.PORT);
     this.ports.add(EurekaForTest.PORT);
