@@ -1,4 +1,4 @@
-# Apache Fineract CN Service Starter 
+# Apache Fineract CN Service Starter [![Build Status](https://api.travis-ci.com/apache/fineract-cn-service-starter.svg?branch=develop)](https://travis-ci.com/apache/fineract-cn-service-starter)
 
 
 This project makes it possible to start services locally for the purpose of writing integration tests.
