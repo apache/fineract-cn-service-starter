@@ -32,12 +32,12 @@ plugins {
 }
 
 group 'org.apache.fineract.cn'
-version '0.1.0-BUILD-SNAPSHOT'
+version '0.1.x-SNAPSHOT'
 
 ext.versions = [
-        frameworkapi    : '0.1.0-BUILD-SNAPSHOT',
-        frameworktest   : '0.1.0-BUILD-SNAPSHOT',
-        frameworkanubis : '0.1.0-BUILD-SNAPSHOT',
+        frameworkapi    : '0.1.x-SNAPSHOT',
+        frameworktest   : '0.1.x-SNAPSHOT',
+        frameworkanubis : '0.1.x-SNAPSHOT',
         validator       : '5.3.0.Final',
         springcontext   : '4.3.3.RELEASE',
         activeMQ        : '5.13.2',
