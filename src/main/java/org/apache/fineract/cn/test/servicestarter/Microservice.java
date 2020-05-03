@@ -25,7 +25,7 @@ import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.junit.rules.ExternalResource;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
 import java.io.File;
